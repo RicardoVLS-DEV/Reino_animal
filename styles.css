@@ -1,0 +1,381 @@
+/* ============================================================
+   CUADERNO DE CAMPO DEL NATURALISTA — sistema de diseño
+   Tipografia: Fraunces (display) + Inter (cuerpo) + JetBrains Mono (datos)
+   ============================================================ */
+
+:root {
+    /* Modo claro - papel calido */
+    --bg-color: #efe9d8;
+    --paper: #faf6ee;
+    --card-bg: #fffdf8;
+    --text-color: #2b2620;
+    --text-muted: #6b6253;
+    --border-color: #d9cfb8;
+    --border-strong: #2b2620;
+    --input-bg: #fffdf8;
+    --accent: #5c6b47;
+    --accent-dark: #46532f;
+    --accent-contrast: #fffdf8;
+    --stamp: #b5582c;
+    --shadow: rgba(43, 38, 32, 0.12);
+}
+
+body.dark-mode {
+    --bg-color: #14130f;
+    --paper: #1b1a16;
+    --card-bg: #232017;
+    --text-color: #ede6d6;
+    --text-muted: #b3a890;
+    --border-color: #3a352a;
+    --border-strong: #ede6d6;
+    --input-bg: #232017;
+    --accent: #8aa06a;
+    --accent-dark: #6f8c52;
+    --accent-contrast: #14130f;
+    --stamp: #d97c4c;
+    --shadow: rgba(0, 0, 0, 0.45);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', Arial, sans-serif;
+    margin: 0;
+    padding: 32px 18px 60px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s;
+    background-image:
+        radial-gradient(circle at 1px 1px, var(--border-color) 1px, transparent 0);
+    background-size: 22px 22px;
+}
+
+.notebook {
+    position: relative;
+    max-width: 680px;
+    margin: 0 auto;
+    background: var(--paper);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 28px 36px 36px 48px;
+    box-shadow:
+        0 1px 2px var(--shadow),
+        0 18px 40px -20px var(--shadow);
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* Lomo cosido a la izquierda, evoca un cuaderno fisico */
+.spine {
+    position: absolute;
+    left: 18px;
+    top: 24px;
+    bottom: 24px;
+    width: 1px;
+    background-image: repeating-linear-gradient(
+        to bottom,
+        var(--border-strong) 0,
+        var(--border-strong) 6px,
+        transparent 6px,
+        transparent 14px
+    );
+    opacity: 0.35;
+}
+
+/* ----------------- BARRA SUPERIOR ----------------- */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 16px;
+    margin-bottom: 28px;
+    border-bottom: 1px dashed var(--border-color);
+    font-size: 13px;
+}
+
+#weatherWidget {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-muted);
+    letter-spacing: 0.01em;
+    text-align: left;
+}
+
+#weatherWidget strong {
+    color: var(--text-color);
+}
+
+.theme-btn {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.01em;
+    transition: background-color 0.2s, border-color 0.2s, transform 0.15s;
+    white-space: nowrap;
+}
+
+.theme-btn:hover {
+    border-color: var(--accent);
+    transform: translateY(-1px);
+}
+
+.theme-btn:focus-visible,
+button:focus-visible,
+select:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* ----------------- PORTADA ----------------- */
+.cover {
+    margin-bottom: 30px;
+}
+
+.eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 12px;
+}
+
+h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(28px, 6vw, 38px);
+    line-height: 1.15;
+    margin: 0 0 14px;
+    letter-spacing: -0.01em;
+}
+
+.paw {
+    display: inline-block;
+}
+
+.lede {
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+/* ----------------- FORMULARIO DE BUSQUEDA ----------------- */
+.search-box {
+    margin-bottom: 22px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+select,
+input,
+.search-box button {
+    padding: 13px 14px;
+    font-size: 15px;
+    font-family: 'Inter', sans-serif;
+    border: 1px solid var(--border-color);
+    border-radius: 7px;
+    outline: none;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+select:hover,
+input:hover {
+    border-color: var(--accent);
+}
+
+select:focus,
+input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+input {
+    width: 38%;
+    min-width: 200px;
+    flex: 1 1 200px;
+}
+
+select {
+    cursor: pointer;
+    flex: 0 0 auto;
+}
+
+.search-box button {
+    background-color: var(--accent);
+    color: var(--accent-contrast);
+    border: 1px solid var(--accent);
+    cursor: pointer;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    transition: background-color 0.2s, transform 0.15s;
+}
+
+.search-box button:hover {
+    background-color: var(--accent-dark);
+    border-color: var(--accent-dark);
+    transform: translateY(-1px);
+}
+
+.search-box button:active {
+    transform: translateY(0);
+}
+
+/* ----------------- TARJETA DE RESULTADO ----------------- */
+/* #result lo rellena app.js con innerHTML; estas reglas dan estilo
+   a las etiquetas que el script genera (h2, p, img.pet-img, .error, .badge) */
+#result {
+    margin-top: 8px;
+    padding: 28px 26px;
+    background: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 6px 18px var(--shadow);
+    display: none;
+    text-align: left;
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Sello de catalogo, esquina superior derecha de la ficha */
+#result::before {
+    content: "FICHA";
+    position: absolute;
+    top: 14px;
+    right: -28px;
+    width: 130px;
+    padding: 4px 0;
+    background: var(--stamp);
+    color: #fffdf8;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-align: center;
+    transform: rotate(35deg);
+    box-shadow: 0 2px 6px var(--shadow);
+}
+
+#result h2 {
+    text-align: center;
+    margin: 0 0 16px;
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--text-color);
+    padding-right: 10px;
+}
+
+#result p {
+    line-height: 1.65;
+    font-size: 15px;
+    color: var(--text-color);
+    margin: 0 0 14px;
+}
+
+.pet-img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 6px auto 0 auto;
+    border: 1px solid var(--border-color);
+}
+
+.error {
+    color: #8a3220;
+    font-weight: 600;
+    background-color: color-mix(in srgb, var(--stamp) 10%, var(--card-bg));
+    padding: 16px;
+    border-radius: 7px;
+    border: 1px solid color-mix(in srgb, var(--stamp) 35%, var(--border-color));
+    text-align: center;
+}
+
+body.dark-mode .error {
+    color: #f0b08c;
+}
+
+.badge {
+    display: inline-block;
+    background: color-mix(in srgb, var(--accent) 16%, var(--card-bg));
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    margin: 4px 5px;
+    color: var(--accent-dark);
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+body.dark-mode .badge {
+    color: var(--accent);
+}
+
+/* ----------------- PIE DE PAGINA ----------------- */
+.page-footer {
+    margin-top: 34px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--border-color);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--text-muted);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.dot {
+    opacity: 0.6;
+}
+
+/* ----------------- RESPONSIVE ----------------- */
+@media (max-width: 480px) {
+    .notebook {
+        padding: 24px 20px 28px 32px;
+    }
+
+    .spine {
+        left: 10px;
+    }
+
+    .search-box {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    input,
+    select,
+    .search-box button {
+        width: 100%;
+        flex: none;
+    }
+
+    #result::before {
+        top: 10px;
+        right: -32px;
+        width: 120px;
+    }
+}
+
+/* ----------------- ACCESIBILIDAD: reduce motion ----------------- */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+}
