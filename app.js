@@ -1,4 +1,4 @@
-// CONFIGURACIÓN DE APIS Y LLAVES (Se mantienen tus credenciales y cambiamos wikipedia a español 'es')
+// CONFIGURACIÓN DE APIS Y LLAVES
 const CONFIG = {
     cat: {
         apiKey: "live_DoapfaGn2dhhIbJT6YH2xOYwi9aPYzVlBnQ9rOC8kSAsJfh11XxAzoYOv5U2Cl2e",
@@ -20,18 +20,18 @@ const resultContainer = document.getElementById('result');
 const themeToggle = document.getElementById('themeToggle');
 const weatherWidget = document.getElementById('weatherWidget');
 
-// --- EJECUCIÓN AL CARGAR LA PÁGINA ---
+//EJECUCIÓN AL CARGAR LA PÁGINA
 document.addEventListener('DOMContentLoaded', () => {
     initDarkMode();
     initWeatherAndGeo();
 });
 
-// --- LÓGICA DE MODO OSCURO ---
+//LPGICA DE MODO OSCURO
 function initDarkMode() {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
         document.body.classList.add('dark-mode');
-        themeToggle.textContent = "☀️ Modo Claro";
+        themeToggle.textContent = "Modo Claro";
     }
 
     themeToggle.addEventListener('click', () => {
@@ -41,15 +41,15 @@ function initDarkMode() {
             themeToggle.textContent = "☀️ Modo Claro";
         } else {
             localStorage.setItem('theme', 'light');
-            themeToggle.textContent = "🌙 Modo Oscuro";
+            themeToggle.textContent = "Modo Oscuro";
         }
     });
 }
 
-// --- LÓGICA DE GEOLOCALIZACIÓN Y CLIMA ---
+//LOGICA DE GEOLOCALIZACIÓN Y CLIMA ---
 function initWeatherAndGeo() {
     if (!navigator.geolocation) {
-        weatherWidget.innerHTML = "❌ Geolocalización no soportada";
+        weatherWidget.innerHTML = "Geolocalización no soportada";
         return;
     }
 
@@ -70,16 +70,16 @@ function initWeatherAndGeo() {
             // Validamos campos comunes de ciudad que devuelve la API
             const city = geoData.address.city || geoData.address.town || geoData.address.village || "Ubicación Desconocida";
 
-            // Renderizamos en el widget
-            weatherWidget.innerHTML = `📍 <strong>${city}</strong>: ${temp}°C 🌤️`;
+            // Renderizamos en el widgHet
+            weatherWidget.innerHTML = `<strong>${city}</strong>: ${temp}°C 🌤️`;
 
         } catch (error) {
             console.error(error);
-            weatherWidget.innerHTML = "⚠️ Error al obtener datos del clima";
+            weatherWidget.innerHTML = "Error al obtener datos del clima";
         }
     }, (error) => {
         // Manejo si el usuario deniega el permiso de ubicación
-        weatherWidget.innerHTML = "📍 Ubicación denegada";
+        weatherWidget.innerHTML = "Ubicación denegada";
     });
 }
 
@@ -106,14 +106,14 @@ async function searchData() {
             const response = await fetch(`${currentApi.baseUrl}${encodeURIComponent(formattedQuery)}`);
             
             if (!response.ok) {
-                resultContainer.innerHTML = `<p class="error">❌ No se encontraron resultados para "${query}" en esta categoría.</p>`;
+                resultContainer.innerHTML = `<p class="error">No se encontraron resultados para "${query}" en esta categoría.</p>`;
                 return;
             }
 
             const data = await response.json();
 
             if (data.type === 'disambiguation') {
-                resultContainer.innerHTML = `<p class="error">❌ El término "${query}" es muy ambiguo. Intenta con algo más específico.</p>`;
+                resultContainer.innerHTML = `<p class="error">El término "${query}" es muy ambiguo. Intenta con algo más específico.</p>`;
                 return;
             }
 
@@ -122,7 +122,7 @@ async function searchData() {
                 : `<p class="error">Se encontró información de "${data.title}", pero no hay una foto disponible.</p>`;
 
             resultContainer.innerHTML = `
-                <h2>${data.title} 🦁</h2>
+                <h2>${data.title} </h2>
                 <p style="line-height: 1.6;">${data.extract}</p>
                 ${imgHtml}
             `;
@@ -133,7 +133,7 @@ async function searchData() {
             const data = await response.json();
 
             if (data.length === 0) {
-                resultContainer.innerHTML = `<p class="error">❌ No se encontraron resultados para "${query}" en esta categoría.</p>`;
+                resultContainer.innerHTML = `<p class="error">No se encontraron resultados para "${query}" en esta categoría.</p>`;
                 return;
             }
 
@@ -166,6 +166,6 @@ async function searchData() {
 
     } catch (error) {
         console.error(error);
-        resultContainer.innerHTML = `<p class="error">⚠️ Error de conexión o fallo en los servidores de información.</p>`;
+        resultContainer.innerHTML = `<p class="error">Error de conexión o fallo en los servidores de información.</p>`;
     }
 }
